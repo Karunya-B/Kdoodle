@@ -394,36 +394,29 @@ canvas.addEventListener('mouseout', function() {
     draggingImg = false;
 });
 document.getElementById('exportPdfBtn').addEventListener('click', function() {
-    // Set desired PDF size (e.g., A4 at 300dpi)
-    const pdfWidth = 2480; // pixels (A4 width at 300dpi)
-    const pdfHeight = 3508; // pixels (A4 height at 300dpi)
+    // Use the canvas size or set your desired export size
+    const width = canvas.width;
+    const height = canvas.height;
+    const imageData = canvas.toDataURL('image/png', 1.0);
 
-    // Create a temporary canvas for high-res export
-    const exportCanvas = document.createElement('canvas');
-    exportCanvas.width = pdfWidth;
-    exportCanvas.height = pdfHeight;
-    const exportCtx = exportCanvas.getContext('2d');
-
-    // Draw your main canvas onto the export canvas, scaling up
-    exportCtx.drawImage(canvas, 0, 0, pdfWidth, pdfHeight);
-
-    // Get image data
-    const imgData = exportCanvas.toDataURL('image/png', 1.0);
-
-    // Create PDF
-    const { jsPDF } = window.jspdf;
-    const pdf = new jsPDF({
-        orientation: 'portrait',
-        unit: 'pt',
-        format: [pdfWidth, pdfHeight]
-    });
-
-    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-    pdf.save('canvas-export.pdf');
+    fetch('http://localhost:3000/export-pdf', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ imageData, width, height })
+    })
+    .then(response => response.blob())
+    .then(blob => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'canvas-export.pdf';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        window.URL.revokeObjectURL(url);
+    })
+    .catch(() => alert('Failed to export PDF'));
 });
-const imgUrlBtn = document.getElementById('imgUrlBtn');
-const imgUrlInput = document.getElementById('imgUrlInput');
-
 imgUrlBtn.addEventListener('click', function(e) {
     // Only trigger if the user clicks the icon or button, not the input
     if (e.target === imgUrlInput) return;
