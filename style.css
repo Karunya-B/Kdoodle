@@ -30,7 +30,7 @@ body {
     position: absolute;
     left : 20px;
     top: 100px;
-    flex-shrink: 0; /* Prevent dropdown from shrinking */
+    flex-shrink: 0; 
 }
 
 .select {
@@ -108,7 +108,7 @@ body {
 
 .canvas-container {
     flex: 1;
-    margin: left 250px; /* Take remaining space */
+    margin: left 250px; 
 }
 
 #canvas {
@@ -123,15 +123,15 @@ body {
     background: #2a2f3b;
     color: #fff;
     display: flex;
-    justify-content: center; /* Center content instead of space-between */
+    justify-content: center; 
     align-items: center;
-    border: 2px #2a2f3b solid; /* Match the select button border */
+    border: 2px #2a2f3b solid; 
     border-radius: 0.5em;
     padding: 1em;
     cursor: pointer;
     transition: all 0.3s;
     box-sizing: border-box;
-    width: 80px; /* Increased from 50px for better usability */
+    width: 80px; 
     height: 60px;
     width: 55px;;
     position: absolute;
@@ -139,12 +139,10 @@ body {
     top: 170px;
 }
 
-/* Hover effect for pen button */
 .pen:hover {
     background: #323741;
 }
 
-/* Click effect - blue glow (same as dropdown) */
 .pen.clicked {
     border: 2px #26489a solid;
     box-shadow: 0 0 0.8em #26489a;
@@ -153,15 +151,15 @@ body {
     background: #2a2f3b;
     color: #fff;
     display: flex;
-    justify-content: center; /* Center content instead of space-between */
+    justify-content: center; 
     align-items: center;
-    border: 2px #2a2f3b solid; /* Match the select button border */
+    border: 2px #2a2f3b solid; 
     border-radius: 0.5em;
     padding: 1em;
     cursor: pointer;
     transition: all 0.3s;
     box-sizing: border-box;
-    width: 80px; /* Increased from 50px for better usability */
+    width: 80px; 
     height: 60px;
     width: 55px;;
     position: absolute;
@@ -181,15 +179,15 @@ body {
     background: #2a2f3b;
     color: #fff;
     display: flex;
-    justify-content: center; /* Center content instead of space-between */
+    justify-content: center; 
     align-items: center;
-    border: 2px #2a2f3b solid; /* Match the select button border */
+    border: 2px #2a2f3b solid; 
     border-radius: 0.5em;
     padding: 1em;
     cursor: pointer;
     transition: all 0.3s;
     box-sizing: border-box;
-    width: 80px; /* Increased from 50px for better usability */
+    width: 80px; 
     height: 60px;
     width: 55px;;
     position: absolute;
@@ -259,7 +257,7 @@ body {
     height: 60px;
     position: absolute;
     left: 20px;
-    top: 240px; /* Place between pen and eraser */
+    top: 240px; 
 }
 .text-btn:hover {
     background: #323741;
@@ -284,7 +282,7 @@ body {
     height: 60px;
     position: absolute;
     left: 20px;
-    top: 450px; /* Adjust as needed for your layout */
+    top: 450px; 
     font-size: 16px;
 }
 

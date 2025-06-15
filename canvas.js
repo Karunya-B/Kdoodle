@@ -1,11 +1,9 @@
 const canvas = document.getElementById('canvas');
-const ctx = canvas.getContext('2d');//get conttext of canvas 2d one
-
+const ctx = canvas.getContext('2d');
 window.addEventListener('load', () => {
     resize();
     window.addEventListener('resize', resize);
     canvas.addEventListener("mousedown",startpainting);
-    //when the mouse is pressed down we will create a function startpainting-it will start painting
     canvas.addEventListener("mousemove", sketch);
     canvas.addEventListener("mouseup", stoppainting);
     canvas.addEventListener("mouseout",stoppainting,false);
@@ -41,7 +39,6 @@ dropdowns.forEach(dropdown => {
             });
             option.classList.add('active');
 
-            // Draw shape based on selected option (do not clear canvas)
             const centerX = canvas.width / 2;
             const centerY = canvas.height / 2;
             if (option.innerText === 'Rectangle') {
@@ -78,7 +75,6 @@ dropdowns.forEach(dropdown => {
 });
 
 
-// Close dropdown when clicking outside
 document.addEventListener('click', (e) => {
     if (!e.target.closest('.dropdown')) {
         dropdowns.forEach(dropdown => {
@@ -143,7 +139,7 @@ document.querySelectorAll('.color').forEach(el => {
 });
 
 
-//remove click
+
 document.addEventListener('click', (e) => {
     if (!e.target.closest('.pen')) {
         penButton.classList.remove('clicked');
@@ -163,24 +159,21 @@ let coord ={
     x:0,
     y:0,
 };
-let lineWidth = 5;//width of the stroke of the pen
-let color = 'black';//color of the stroke of the pen
-let paint = false;//if the mouse is pressed or not
+let lineWidth = 5;
+let color = 'black';
+let paint = false;
 const getPosition = (e) => {
-    coord.x = e.clientX - canvas.offsetLeft;//clientX is the position of the cursor from the left of the window but we from left of the canvas therefore we subtract the offsetLeft of the canvas,this is to get the position of the cursor with respect to the canvas
-    coord.y = e.clientY - canvas.offsetTop;//clientY is the position of the cursor from the top of the window
+    coord.x = e.clientX - canvas.offsetLeft;
+    coord.y = e.clientY - canvas.offsetTop;
 };
 
-
-
-//start painting function
 const startpainting = (e) => {
-    paint = true;//parameter paint is true
+    paint = true;
     getPosition(e);
 };
 
 const stoppainting = () => {
-    paint = false;//parameter paint is false
+    paint = false;
 }
 
 const sketch = (e) => {
@@ -246,7 +239,6 @@ let caretVisible = true;
 let caretInterval = null;
 
 function renderTextWithCaret() {
-    // Clear only the area where text and caret are drawn
     ctx.clearRect(textX - 2, textY - 2, ctx.measureText(typedText + 'M').width + 6, 26);
     ctx.font = '20px Arial';
     ctx.fillStyle = color;
@@ -310,30 +302,27 @@ const clearButton = document.querySelector('.clear');
 clearButton.addEventListener('click', function() {
     this.classList.toggle('clicked');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Reset text typing state and caret
     typing = false;
     typedText = '';
     stopCaretBlink();
 });
 
 let importedImg = null;
-let imgX = 50, imgY = 50; // Initial position
-let imgWidth = 200, imgHeight = 200; // Default size, can be set to img.width/img.height after load
+let imgX = 50, imgY = 50;
+let imgWidth = 200, imgHeight = 200; 
 let draggingImg = false;
 let dragOffsetX = 0, dragOffsetY = 0;
 
-// Draw everything (shapes, freehand, etc.)
-// For now, just clear and draw the image
+
 function redrawCanvas() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     if (importedImg) {
         ctx.drawImage(importedImg, imgX, imgY, imgWidth, imgHeight);
     }
-    // Optionally, redraw other things here (shapes, text, etc.)
+    
 }
 
-// Image import logic
+
 const importImgBtn = document.getElementById('importImgBtn');
 const imgUpload = document.getElementById('imgUpload');
 
@@ -360,7 +349,7 @@ imgUpload.addEventListener('change', function(e) {
     reader.readAsDataURL(file);
 });
 
-// Drag logic
+
 canvas.addEventListener('mousedown', function(e) {
     if (importedImg) {
         const mouseX = e.clientX - canvas.offsetLeft;
@@ -394,7 +383,6 @@ canvas.addEventListener('mouseout', function() {
     draggingImg = false;
 });
 document.getElementById('exportPdfBtn').addEventListener('click', function() {
-    // Use the canvas size or set your desired export size
     const width = canvas.width;
     const height = canvas.height;
     const imageData = canvas.toDataURL('image/png', 1.0);
@@ -418,7 +406,6 @@ document.getElementById('exportPdfBtn').addEventListener('click', function() {
     .catch(() => alert('Failed to export PDF'));
 });
 imgUrlBtn.addEventListener('click', function(e) {
-    // Only trigger if the user clicks the icon or button, not the input
     if (e.target === imgUrlInput) return;
     e.preventDefault();
     const url = imgUrlInput.value.trim();

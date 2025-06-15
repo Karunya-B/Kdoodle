@@ -1,13 +1,10 @@
-// server.js
-// Node.js Express server for exporting canvas as high-res PDF
-
 const express = require('express');
 const { PDFDocument } = require('pdf-lib');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const app = express();
-app.use(cors()); // Allow requests from your frontend
+app.use(cors()); 
 app.use(bodyParser.json({ limit: '20mb' }));
 
 app.post('/export-pdf', async (req, res) => {
