@@ -2,10 +2,17 @@ const express = require('express');
 const { PDFDocument } = require('pdf-lib');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const path = require('path');
 
 const app = express();
 app.use(cors()); 
 app.use(bodyParser.json({ limit: '20mb' }));
+
+app.use('/', express.static(__dirname));
+
+app.get('/', function(req, res) {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
 
 app.post('/export-pdf', async (req, res) => {
     try {

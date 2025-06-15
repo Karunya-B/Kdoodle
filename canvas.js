@@ -382,18 +382,22 @@ canvas.addEventListener('mouseup', function() {
 canvas.addEventListener('mouseout', function() {
     draggingImg = false;
 });
-document.getElementById('exportPdfBtn').addEventListener('click', function() {
+document.getElementById('exportPdfBtn').addEventListener('click', async function() {
     const width = canvas.width;
     const height = canvas.height;
     const imageData = canvas.toDataURL('image/png', 1.0);
 
-    fetch('http://localhost:3000/export-pdf', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ imageData, width, height })
-    })
-    .then(response => response.blob())
-    .then(blob => {
+    // Try server-side PDF generation first
+    try {
+        const response = await fetch('http://localhost:3000/export-pdf', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ imageData, width, height })
+        });
+        
+        if (!response.ok) throw new Error('Server error');
+        
+        const blob = await response.blob();
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
@@ -402,8 +406,21 @@ document.getElementById('exportPdfBtn').addEventListener('click', function() {
         a.click();
         a.remove();
         window.URL.revokeObjectURL(url);
-    })
-    .catch(() => alert('Failed to export PDF'));
+    } catch (error) {
+        // If server method fails, fallback to client-side PDF generation
+        try {
+            const pdf = new jspdf.jsPDF({
+                orientation: width > height ? 'landscape' : 'portrait',
+                unit: 'px',
+                format: [width, height]
+            });
+            
+            pdf.addImage(imageData, 'PNG', 0, 0, width, height);
+            pdf.save('canvas-export.pdf');
+        } catch (clientError) {
+            alert('Failed to export PDF. Please make sure either the server is running or jsPDF library is loaded.');
+        }
+    }
 });
 imgUrlBtn.addEventListener('click', function(e) {
     if (e.target === imgUrlInput) return;

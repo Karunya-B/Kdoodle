@@ -1,71 +1,147 @@
-## KDoodle Drawing Web App
-KDoodle is a modern web-based drawing application that allows users to draw freehand, shapes, add text, erase, import images (from file or URL), and export their work as a high-resolution PDF. The app is designed for both mouse and touch input and features a clean, intuitive interface.
+# KDoodle Drawing Web App
 
-## Purpose
-This project was built as part of assignment for Rocketium's Software Engineer Intern role. It showcases front-end development, canvas manipulation, tool state logic, image handling, and export functionality.
+KDoodle is a modern web-based drawing application that combines the simplicity of MS Paint with advanced features like high-quality PDF export and image import capabilities. The app is designed for both mouse and touch input, featuring a clean, intuitive interface.
+
+
+## Key Features
+-  Freehand drawing with customizable colors
+- Shape tools (rectangle, circle, triangle, line)
+-  Text insertion with real-time preview
+- Image import from file or URL
+-  Dual-mode PDF export (server/client)
+- Touch-device support
 
 ## Tech Stack
-1 *HTML, **CSS, *JavaScript (Vanilla JS)
-jsPDF for PDF export
-2 Font Awesome for icons (loaded via CDN)
-Tech Stack
-3 *HTML, **CSS, *JavaScript (Vanilla JS)
-jsPDF for PDF export
+- HTML, CSS, JavaScript (Vanilla JS)
+- Node.js and Express.js for server-side PDF processing
+- pdf-lib for high-quality server-side PDF generation
+- jsPDF for client-side PDF fallback
+- Font Awesome for icons (loaded via CDN)
 
-## Features
-Freehand Drawing: Draw on the canvas using the pen tool with selectable colors.
+## Detailed Features
 
-Shape Drawing: Instantly add rectangles, circles, triangles, and lines from the shapes dropdown.
+### Drawing Tools
+- **Freehand Drawing**: Smooth, responsive drawing with adjustable colors
+- **Shape Tools**: Quick-access dropdown for rectangles, circles, triangles, and lines
+- **Text Tool**: Direct on-canvas typing with real-time preview
+- **Eraser**: Precision erasing with adjustable brush size
+- **Clear Canvas**: One-click canvas clearing
 
-Text Tool: Click anywhere on the canvas to type text directly, with a blinking caret to indicate typing position.
+### Image Handling
+- **File Import**: Drag-and-drop or click-to-upload images
+- **URL Import**: Paste image URLs to import from the web
+- **Image Manipulation**: Drag to reposition imported images
+- **Multi-Image Support**: Import multiple images to create compositions
 
-Eraser: Erase parts of your drawing with a thick eraser brush.
-Clear Canvas: Instantly clear the entire canvas, including all drawings and text.
+### PDF Export System
+The app features a dual-mode PDF export system for maximum flexibility:
 
-Color Palette: Choose from a palette of colors for the pen tool.
-Image Import:
+**1. High-Quality Mode (Server)**
+- Runs when Node.js server is active
+- Uses pdf-lib for professional-grade PDFs
+- Best for high-resolution exports
+- Maintains image quality and vector shapes
 
-From File: Click the image button to upload and place an image on the canvas. The image can be moved by canvas. The image can be moved by dragging.
-From URL: Paste an image URL in the provided field and click the link icon to import. The image can be moved by dragging.
+**2. Offline Mode (Client)**
+- Automatic fallback when server isn't available
+- Uses jsPDF for client-side generation
+- Works without internet connection
+- Quick and convenient for basic exports
 
-Export as PDF: Export your entire canvas as a high-resolution PDF (A4, 300dpi) with the export button in the top right corner.
+## Quick Start Guide
 
-Touch Support: Draw and erase using touch on supported devices.
+### 1. Basic Setup (Client-Only Mode)
+1. Clone the repository
+2. Open `index.html` in a modern browser
+3. Start drawing! No additional setup needed
 
-## How to Use
-Drawing:
-Click the pen button to activate freehand drawing. Select a color from the palette below.
-Use the eraser button to erase parts of your drawing.
-Use the clear button to clear the entire canvas.
+### 2. Server Setup (For High-Quality PDF Export)
+```bash
+# Install Node.js dependencies
+npm install
 
-Shapes:
-Click the shapes dropdown and select a shape to add it to the center of the canvas.
-Shapes are drawn in the currently selected pen color.
+# Start the server
+node server.js
 
-Text:
-Click the text button, then click anywhere on the canvas to start typing. A blinking caret will show where text will appear.
-Press Enter to finish typing.
+# Server will be running at:
+# http://localhost:3000
+```
 
-Importing Images:
-Click the image button to upload an image from your device. The image will appear on the canvas and can be moved by dragging.
+### Server Requirements
+- Node.js 14.x or higher
+- NPM 6.x or higher
+- Required packages (automatically installed):
+  - express
+  - cors
+  - body-parser
+  - pdf-lib
 
-Paste an image URL in the field below the image button and click the link icon to import an image from the web. The image can also be moved by dragging.
+## User Guide
 
-Exporting:
-Click the export button (top right) to download your canvas as a high-resolution PDF.
+### Drawing Tools
+1. **Pen Tool**
+   - Click the pen icon or press `P`
+   - Select color from the palette
+   - Draw freely on canvas
 
-## Backend Setup for PDF Export
-To enable high-resolution PDF export via the Node.js backend, follow these steps:
+2. **Shapes**
+   - Click the shapes dropdown
+   - Select desired shape
+   - Shape appears at cursor position
+   - Uses currently selected color
 
-Install Node.js and npm
-Download and install Node.js (which includes npm) from https://nodejs.org/.
+3. **Text Tool**
+   - Click text icon or press `T`
+   - Click anywhere to start typing
+   - Press Enter to finish
 
-Install backend dependencies
+4. **Eraser**
+   - Click eraser icon or press `E`
+   - Drag to erase
+   - Double-click eraser for size options
 
-Start the backend server
+### Image Operations
+1. **From Local File**
+   ```
+   1. Click image icon
+   2. Select file from computer
+   3. Drag to position
+   ```
 
-You should see a message like:
-Server is running on port 3000
+2. **From URL**
+   ```
+   1. Paste URL in image field
+   2. Click link icon
+   3. Image appears on canvas
+   ```
+
+### Exporting Your Work
+1. **High-Quality Export (Server Mode)**
+   ```
+   1. Ensure server is running
+   2. Click export button
+   3. Save high-quality PDF
+   ```
+
+2. **Quick Export (Client Mode)**
+   ```
+   1. Click export button
+   2. PDF generates in browser
+   3. Auto-downloads
+   ```
+
+## Troubleshooting
+
+### Common Issues
+1. **PDF Export Not Working**
+   - Check if server is running
+   - Verify node modules are installed
+   - Clear browser cache
+
+2. **Image Import Issues**
+   - Ensure URL is accessible
+   - Check file format (PNG/JPG/GIF)
+   - Verify file size < 5MB
 
 Exporting as PDF
 Use the "Export as PDF" button in the app. The client will send your canvas to the backend, which will generate and return a high-resolution PDF.
