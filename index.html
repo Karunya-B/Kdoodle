@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KDoodle</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <p class="title">KDoodle</p>
+    <div class="dropdown">
+        <div class="select">
+            <span class="selected">
+            <i class="fa-solid fa-shapes"></i></span>
+            <div class="caret"></div>
+        </div>
+        <ul class="options">
+            <li>Rectangle</li>
+            <li>Circle</li>
+            <li>Triangle</li>   
+            <li>Line</li>
+        </ul>
+    </div>
+
+    <div class="pen">
+    <i class="fa-solid fa-pencil"></i>
+    </div>
+    <div class="text-btn">
+    <i class="fa-solid fa-font"></i>
+    </div>
+
+
+    <div class="eraser">
+    <i class="fa-solid fa-eraser"></i>
+    </div>
+
+    <div class="clear"><i class="fa-solid fa-trash"></i></div>
+    <div class="colors">
+        <div  class="color" colour="red" style="background-color: red;"></div>
+        <div  class="color" colour="red" style="background-color: pink;"></div>
+        <div  class="color" colour="green" style="background-color: green;"></div>
+        <div class="color" colour="blue" style="background-color: blue;"></div>
+        <div class="color" colour="yellow" style="background-color: yellow;"></div>
+        <div class="color" colour="black" style="background-color: black;"></div>
+        <div class="color" colour="white" style="background-color: white;"></div>
+        <div class="color" colour="purple" style="background-color: purple;"></div>
+        <div  class="color" colour="orange" style="background-color: orange;
+        "></div>
+        <div class="color" colour="brown" style="background-color: brown;"></div>
+        <div  class="color" colour="gray" style="background-color: gray;">
+        </div>
+    </div>
+    <button id="importImgBtn" style="position:absolute; left:20px; top:400px;"><i class="fa-solid fa-image"></i></button>
+
+    <input type="file" id="imgUpload" accept="image/*" style="display:none;">
+    
+    <div id="imgUrlBtn" style="position:absolute; left:20px; top:520px; display:flex; align-items:center; gap:6px; width:220px; height:40px;">
+    <input type="text" id="imgUrlInput" placeholder="Paste image URL"  style="flex:1; background:transparent; border:none; color:#fff; font-size:14px; outline:none; min-width:0;">
+    <button id="submitUrl">
+    <i class="fa-solid fa-link"></i>
+    </button>
+    </div>
+    <div id="exportPdfBtn" style="position:absolute; right:20px; top:20px; z-index:1002;"><i class="fa-solid fa-download"></i></div>
+    
+    <canvas id="canvas" width="800" height="600"></canvas>
+
+    <script
+    src="canvas.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</body>
+</html>
