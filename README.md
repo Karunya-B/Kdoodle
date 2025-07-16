@@ -2,6 +2,8 @@
 
 KDoodle is a modern web-based drawing application that combines the simplicity of MS Paint with advanced features like high-quality PDF export and image import capabilities. The app is designed for both mouse and touch input, featuring a clean, intuitive interface.
 
+# Kdoole Screenshot
+![alt text](image.png)
 
 ## Key Features
 -  Freehand drawing with customizable colors
@@ -145,7 +147,7 @@ node server.js
 
 Exporting as PDF
 Use the "Export as PDF" button in the app. The client will send your canvas to the backend, which will generate and return a high-resolution PDF.
-
+ 
 ## File Structure
 index.html — Main HTML file, contains the UI and canvas.
 style.css — All styles for layout, buttons, dropdowns, and color palette.
